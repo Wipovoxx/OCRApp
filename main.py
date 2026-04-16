@@ -28,16 +28,12 @@ def screenshot():
     print(result)
 
 def on_click(x, y, button, pressed):
-    if pressed:
-        print('Mouse clicked at ({0}, {1}) with {2}'.format(x, y, button))
-        if len(firstClick) == 0:
-            firstClick.append((x, y))
-            print("First coordinate set at ({0}, {1}).".format(x, y))
-    if not pressed:
-        if len(secondClick) == 0:
-            secondClick.append((x, y))
-            print("Second coordinate set at ({0}, {1}).".format(x, y))
-        print('Mouse released at ({0}, {1}) with {2}'.format(x, y, button))
+    if pressed and len(firstClick) == 0:
+        firstClick.append((x, y))
+        print("First coordinate set at ({0}, {1}).".format(x, y))
+    if not pressed and len(secondClick) == 0:
+        secondClick.append((x, y))
+        print("Second coordinate set at ({0}, {1}).".format(x, y))
 
 def on_press(key):
     try:
