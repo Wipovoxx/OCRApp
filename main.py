@@ -1,5 +1,6 @@
 import pytesseract
 import pyscreenshot
+from PIL import Image
 from pynput import mouse
 from pynput import keyboard
 
@@ -21,8 +22,7 @@ def screenshot():
     bottom = max(y1, y2)
 
     image = pyscreenshot.grab(bbox=(left, top, right, bottom))
-    image.save("test.png")  
-    # Perform OCR on the captured image
+    image.save("test.png")   # type: ignore
     result = pytesseract.image_to_string("test.png", lang='jpn')
     print("OCR Result:")
     print(result)
@@ -34,6 +34,9 @@ def on_click(x, y, button, pressed):
     if not pressed and len(secondClick) == 0:
         secondClick.append((x, y))
         print("Second coordinate set at ({0}, {1}).".format(x, y))
+
+def on_move(x, y):
+    return
 
 def on_press(key):
     try:
@@ -48,6 +51,6 @@ def on_press(key):
         print('Special key {0} pressed.'.format(key))
 
 
-with keyboard.Listener(on_press=on_press) as keyboardListener, mouse.Listener(on_click=on_click) as mouseListener:
+with keyboard.Listener(on_press=on_press) as keyboardListener, mouse.Listener(on_click=on_click,on_move=on_move) as mouseListener:
     keyboardListener.join()
     mouseListener.join()
