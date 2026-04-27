@@ -89,7 +89,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("My App")
+        self.setWindowTitle("OCR App")
 
         self.imageLabel = QLabel("This label will show the screenshot when you click the button.")
         self.imageLabel.setAlignment(Qt.AlignmentFlag.AlignCenter | Qt.AlignmentFlag.AlignTop)
